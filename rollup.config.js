@@ -20,15 +20,21 @@ export default {
   ],
   plugins: [
     peerDepsExternal(),
-    resolve(),
+    resolve({
+      extensions: ['.js', '.jsx']
+    }),
     commonjs(),
     babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**',
       presets: [
         '@babel/preset-env',
-        '@babel/preset-react'
-      ]
+        ['@babel/preset-react', { 
+          pragma: 'React.createElement',
+          pragmaFrag: 'React.Fragment'
+        }]
+      ],
+      extensions: ['.js', '.jsx']
     }),
   ],
 };
